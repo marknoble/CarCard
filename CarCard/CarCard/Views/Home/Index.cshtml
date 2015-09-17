@@ -1,5 +1,33 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Car Card";
 }
 
+Choose a car type:
+<select data-bind="options: aarType,
+                   optionsCaption: 'Choose...',
+                   optionsText: 'name',
+                   value: chosenAARType"></select>
 
+<button data-bind="enable: chosenAARType,
+                   click: resetAARType">Clear</button>
+
+<p data-bind="with: chosenAARType">
+    You have chosen <b data-bind="text: name"></b> 
+    ($<span data-bind="text: type"></span>)
+</p>
+
+<script>
+    function CarCardViewModel() {
+        this.aarType = [
+            { name: "Flat car", type: 'FM' },
+            { name: "Box car", type: 'XM' }
+        ]; // Full list of car codes and names here: http://www.trainweb.org/rslr/aarcodes.html
+        this.chosenAARType = ko.observable();
+        this.resetAARTYpe = function () { this.chosenAARType(null) };
+        this.railroad = ko.observable();
+        this.number = ko.observable();
+        this.description = ko.observable();
+        this.returnTo = ko.observable();
+    }
+    ko.applyBindings(new CarCardViewModel());
+</script>
