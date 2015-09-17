@@ -2,32 +2,32 @@
     ViewBag.Title = "Car Card";
 }
 
-Choose a car type:
-<select data-bind="options: aarType,
-                   optionsCaption: 'Choose...',
-                   optionsText: 'name',
-                   value: chosenAARType"></select>
+<p>
+    Choose a ticket class:
+    <select data-bind="options: tickets,
+                       optionsCaption: 'Choose...',
+                       optionsText: 'name',
+                       value: chosenTicket"></select>
 
-<button data-bind="enable: chosenAARType,
-                   click: resetAARType">Clear</button>
-
-<p data-bind="with: chosenAARType">
-    You have chosen <b data-bind="text: name"></b> 
-    ($<span data-bind="text: type"></span>)
+    <button data-bind="enable: chosenTicket,
+                       click: resetTicket">
+        Clear
+    </button>
+</p>
+<p data-bind="with: chosenTicket">
+    You have chosen <b data-bind="text: name"></b>
+    ($<span data-bind="text: price"></span>)
 </p>
 
-<script>
-    function CarCardViewModel() {
-        this.aarType = [
-            { name: "Flat car", type: 'FM' },
-            { name: "Box car", type: 'XM' }
-        ]; // Full list of car codes and names here: http://www.trainweb.org/rslr/aarcodes.html
-        this.chosenAARType = ko.observable();
-        this.resetAARTYpe = function () { this.chosenAARType(null) };
-        this.railroad = ko.observable();
-        this.number = ko.observable();
-        this.description = ko.observable();
-        this.returnTo = ko.observable();
-    }
-    ko.applyBindings(new CarCardViewModel());
-</script>
+<script type="text/javascript">
+        function TicketsViewModel() {
+            this.tickets = [
+                { name: "Economy", price: 199.95 },
+                { name: "Business", price: 449.22 },
+                { name: "First Class", price: 1199.99 }
+            ];
+            this.chosenTicket = ko.observable();
+            this.resetTicket = function() { this.chosenTicket(null) }
+        }
+        ko.applyBindings(new TicketsViewModel());
+</script>	
